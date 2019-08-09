@@ -3,9 +3,11 @@ module Exercise6 (runTests) where
 import           Data.List
 import           Data.Ord
 
+import           Assert
+
 runTests :: IO ()
 runTests =
-  print (length (hanoi4 15 "a" "b" "c" "d"))
+  assert "ex1.6 expect total num of moves is optimal" $ 129 == length (hanoi4 15 "a" "b" "c" "d")
 
 type Peg = String
 type Move = (Peg, Peg)

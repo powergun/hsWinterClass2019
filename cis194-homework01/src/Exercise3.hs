@@ -2,9 +2,11 @@ module Exercise3
   ( runTests
   , sumDigits ) where
 
+import           Assert
+
 runTests :: IO ()
 runTests =
-  print (sumDigits [16, 7, 12, 5])
+  assert "ex1.3 expect sum of digits" $ 22 == sumDigits [16, 7, 12, 5]
 
 sumDigits :: [Integer] -> Integer
 sumDigits = foldr sumTwoNums 0

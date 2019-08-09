@@ -1,8 +1,10 @@
 module Exercise5 (runTests) where
 
+import           Assert
+
 runTests :: IO ()
 runTests =
-  print (length (hanoi 15 "a" "b" "c"))
+  assert "ex1.5 expect total num of moves" $ 2^15 - 1 == length (hanoi 15 "a" "b" "c")
 
 type Peg = String
 type Move = (Peg, Peg)
