@@ -1,13 +1,4 @@
-module Exercise2
-  ( runTests
-  , doubleEveryOther ) where
-
-import           Assert
-
-runTests :: IO ()
-runTests = do
-  assert "ex1.2 expect elem-1, 3 doubled" $ [8, 14, 6, 10] == doubleEveryOther [8, 7, 6, 5]
-  assert "ex1.2 expect elem-1 doubled" $ [1, 4, 3] == doubleEveryOther [1, 2, 3]
+module Exercise2 ( doubleEveryOther ) where
 
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther []       = []
