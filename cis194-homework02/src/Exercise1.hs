@@ -11,7 +11,7 @@ import           Text.Parsec.String
 
 parseMessages :: String -> [Log.LogMessage]
 parseMessages s =
-  case parse (many parseLogMessage) [] s of
+  case parse (parseLogMessage `endBy` newline) [] s of
     Right ls -> ls
     Left _   -> []
 
@@ -24,17 +24,17 @@ parseMessage s =
 parseLogMessage :: Parser Log.LogMessage
 parseLogMessage = do
   typeToken <- parseTypeToken
-  spaces
+  many1 (char ' ')
   timeStamp <- parseTimeStamp
-  spaces
-  message <- many anyChar
+  many (char ' ')
+  message <- many (noneOf ['\n'])
   return (Log.LogMessage typeToken timeStamp message)
 
 parseTypeToken :: Parser Log.MessageType
 parseTypeToken =
       (char 'I' >> return Log.Info)
   <|> (char 'W' >> return Log.Warning)
-  <|> (char 'E' >> space >> many1 digit >>= \lv -> return (Log.Error (read lv :: Int)))
+  <|> (char 'E' >> many1 (char ' ') >> many1 digit >>= \lv -> return (Log.Error (read lv :: Int)))
 
 parseTimeStamp :: Parser Log.TimeStamp
 parseTimeStamp = do
