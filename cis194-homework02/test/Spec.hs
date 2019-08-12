@@ -2,8 +2,11 @@
 import           Exercise1
 import           Exercise2
 import           Exercise3
+import           Exercise4
 import qualified Log
 import           Test.Hspec
+
+import           Control.Monad
 
 runSpec :: IO ()
 runSpec = hspec $ do
@@ -36,6 +39,13 @@ runSpec = hspec $ do
       logMessages <- Log.testParse parseMessages 9999 "testdata/error.log"
       let (Log.Node _ m _) = build logMessages
       m `shouldBe` Log.LogMessage Log.Info 3815 "about."
+
+  describe "Exercise 4" $
+    it "build sorted log messages, expect first and last message" $ do
+      logMessages <- Log.testParse parseMessages 9999 "testdata/error.log"
+      let lms = inOrder (build logMessages)
+      head lms `shouldBe` Log.LogMessage Log.Info 0 "CHAPTER I. Down the Rabbit-Hole"
+      last lms `shouldBe` Log.LogMessage Log.Info 5522 "pci 0000016facpu0Tste"
 
 main :: IO ()
 main = runSpec
