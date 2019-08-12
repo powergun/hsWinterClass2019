@@ -3,6 +3,7 @@ import           Exercise1
 import           Exercise2
 import           Exercise3
 import           Exercise4
+import           Exercise5
 import qualified Log
 import           Test.Hspec
 
@@ -41,11 +42,16 @@ runSpec = hspec $ do
       m `shouldBe` Log.LogMessage Log.Info 3815 "about."
 
   describe "Exercise 4" $
-    it "build sorted log messages, expect first and last message" $ do
+    it "construct sorted log messages, expect the first and last message" $ do
       logMessages <- Log.testParse parseMessages 9999 "testdata/error.log"
       let lms = inOrder (build logMessages)
       head lms `shouldBe` Log.LogMessage Log.Info 0 "CHAPTER I. Down the Rabbit-Hole"
       last lms `shouldBe` Log.LogMessage Log.Info 5522 "pci 0000016facpu0Tste"
+
+  describe "Exercise 5" $
+    it "expect 9 critical error messages (level >= 50)" $ do
+      messages <- Log.testWhatWentWrong (inOrder . build . parseMessages) whatWentWrong "testdata/error.log"
+      length messages `shouldBe` 9
 
 main :: IO ()
 main = runSpec
