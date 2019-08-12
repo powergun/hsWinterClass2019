@@ -1,6 +1,7 @@
 
 import           Exercise1
 import           Exercise2
+import           Exercise3
 import qualified Log
 import           Test.Hspec
 
@@ -24,14 +25,16 @@ runSpec = hspec $ do
       logMessages <- Log.testParse parseMessages 9999 "testdata/error.log"
       length logMessages `shouldBe` 5523
 
-  describe "Exercise 2" $ do
+  describe "Exercise 2" $
     it "insert log messages from sample.log, expect root node" $ do
       logMessages <- Log.testParse parseMessages 9999 "testdata/sample.log"
       let (Log.Node _ m _) = foldr insert Log.Leaf logMessages
       m `shouldBe` Log.LogMessage (Log.Error 99) 10 "Flange failed!"
+
+  describe "Exercise 3" $
     it "insert log messages from error.log, expect root node" $ do
       logMessages <- Log.testParse parseMessages 9999 "testdata/error.log"
-      let (Log.Node _ m _) = foldr insert Log.Leaf logMessages
+      let (Log.Node _ m _) = build logMessages
       m `shouldBe` Log.LogMessage Log.Info 3815 "about."
 
 main :: IO ()
