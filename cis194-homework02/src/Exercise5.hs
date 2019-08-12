@@ -1,0 +1,1 @@
+-- perl -wnl -E '/Error\s+(\d+)/ or next; say $_ if $1 >= 50' /var/tmp/sut/prt.txt
