@@ -14,9 +14,8 @@ filterMessages :: MessageType -> [LogMessage] -> [String]
 filterMessages (Error lv) =
   map extractMessage . filter isCriticalError
   where
-    isCriticalError (LogMessage (Error lv') _ _) | lv' >= lv = True
-                                                |  otherwise = False
-    isCriticalError _ = False
+    isCriticalError (LogMessage (Error lv') _ _) = lv' >= lv
+    isCriticalError _                            = False
 filterMessages t =
   map extractMessage . filter (\(LogMessage t' _ _) -> t' == t)
 

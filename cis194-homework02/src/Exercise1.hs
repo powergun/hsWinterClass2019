@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE FlexibleContexts #-}
 
 module Exercise1
   ( parseMessage
@@ -22,21 +23,19 @@ parseMessage s =
     Left _  -> Log.Unknown s
 
 parseLogMessage :: Parser Log.LogMessage
-parseLogMessage = do
-  typeToken <- parseTypeToken
-  many1 (char ' ')
-  timeStamp <- parseTimeStamp
-  many (char ' ')
-  message <- many (noneOf ['\n'])
-  return (Log.LogMessage typeToken timeStamp message)
+parseLogMessage =
+    Log.LogMessage
+    <$> skipSpace parseTypeToken skipMany1
+    <*> skipSpace parseTimeStamp skipMany
+    <*> manyTill anyChar (try . lookAhead $ newline)
+  where
+    skipSpace p s = p >>= \x -> s (char ' ') >> pure x
 
 parseTypeToken :: Parser Log.MessageType
 parseTypeToken =
-      (char 'I' >> return Log.Info)
-  <|> (char 'W' >> return Log.Warning)
-  <|> (char 'E' >> many1 (char ' ') >> many1 digit >>= \lv -> return (Log.Error (read lv :: Int)))
+      (char 'I' >> pure Log.Info)
+  <|> (char 'W' >> pure Log.Warning)
+  <|> fmap (Log.Error . read) (char 'E' >> many1 (char ' ') >> many1 digit)
 
 parseTimeStamp :: Parser Log.TimeStamp
-parseTimeStamp = do
-  stamp <- many1 digit
-  return (read stamp :: Log.TimeStamp)
+parseTimeStamp = read <$> many1 digit
