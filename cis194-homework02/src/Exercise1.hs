@@ -24,8 +24,16 @@ parseMessage s =
 
 parseLogMessage :: Parser Log.LogMessage
 parseLogMessage =
-    Log.LogMessage
-    <$> skipSpace parseTypeToken skipMany1
+    -- equivalent to
+    -- Log.LogMessage <$> skipSpace ...
+    -- see Programming Haskell L5152 and L5167 to see why
+    -- applicative style is less encouraged to monadic do style
+    -- but it has a performance benefit
+    -- also review this section (L5152) to understand the core
+    -- of a parser monad
+    -- pure g <*> item <*> item <*> item
+    pure Log.LogMessage
+    <*> skipSpace parseTypeToken skipMany1
     <*> skipSpace parseTimeStamp skipMany
     <*> manyTill anyChar (try . lookAhead $ newline)
   where
