@@ -45,13 +45,17 @@ Then it uses a filter lambda to discard those that do not pass
 the local-maxima test.
 -}
 localMaxima :: [Integer] -> [Integer]
-localMaxima xs = map (!! 1) $ filter (\[a, b, c] -> b > a && b > c) $ triplets
+localMaxima xs = map (!! 1) $ filter (\[a, b, c] -> b > a && b > c) triplets
   where
     triplets = filter (\n -> length n == 3) $ transpose [xs, drop 1 xs, drop 2 xs]
 
 
 
-histogram :: [Integer] -> String
-histogram xs = unlines $ transpose $ map row [0..9]
+-- histogram :: [Integer] -> String
+histogram xs = unlines $ transpose $ map (\n -> space n ++ bar n ++ base n) columns
   where
-    row n = take (length xs + 2) (show n ++ "=" ++ (take (length $ filter (==n) xs) $ repeat '*') ++ (take 10 $ repeat ' '))
+    columns = [0..9]
+    height = maximum $ map (\n -> length [x | x <- xs, x == n]) columns
+    bar n = replicate (length $ filter (==n) xs) '*'
+    space n = replicate (height - length (bar n)) ' '
+    base n = "=" ++ show n
