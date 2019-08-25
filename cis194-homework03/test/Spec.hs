@@ -18,6 +18,20 @@ runSpec = hspec $ do
       localMaxima [2,3,4,1,5] `shouldBe` [4]
       localMaxima [1,2,3,4,5] `shouldBe` []
 
+  describe "Exercise 3" $ do
+    it "histogram" $ do
+      histogram [1, 2, 3] `shouldBe` unlines [ " *        ",
+                                               " *        ",
+                                               " *   *    ",
+                                               "==========",
+                                               "0123456789" ]
+      histogram [1, 2, 3] `shouldBe` unlines [ "    *     ",
+                                               "    *     ",
+                                               "    * *   ",
+                                               "  ****** *",
+                                               "==========",
+                                               "0123456789" ]
+
 main :: IO ()
 main = do
   runSpec
