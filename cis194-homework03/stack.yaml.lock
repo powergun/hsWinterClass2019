@@ -3,7 +3,14 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: sieve-0.1.0.1@sha256:69232c50051db8acadef6c18528350d763e705419e1228fe1be583e5589eb11b,1364
+    pantry-tree:
+      size: 204
+      sha256: c8f7789a016f3745489b5c735cea8121f2c901447645692f2eae272a93ae9e1e
+  original:
+    hackage: sieve-0.1.0.1
 snapshots:
 - completed:
     size: 523454
