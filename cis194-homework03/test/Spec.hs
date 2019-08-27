@@ -1,6 +1,8 @@
 import           Test.Hspec
 
-import           Golf
+import           Exercise1
+import           Exercise2
+import           Exercise3
 
 runSpec :: IO ()
 runSpec = hspec $ do
