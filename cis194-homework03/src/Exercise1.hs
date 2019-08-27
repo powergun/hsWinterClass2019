@@ -17,5 +17,5 @@ created in Part 1
 -}
 skips :: [a] -> [[a]]
 skips xs =
-  let f n = [snd c|c<-(zip [1..] xs),(mod (fst c) n == 0)]
+  let f n = [snd c|c<-zip [1..] xs,mod (fst c) n == 0]
   in map f [1..length xs]

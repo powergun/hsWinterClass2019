@@ -9,7 +9,10 @@ foreach(sort(my @filenames = qx|ls ${dirp}/*.hs|)) {
     my $charCount = 0;
     chomp; say $_; open(my $fh, $_) or die; while(<$fh>) {
         next unless /\-\}/../^\s+$/; chomp; s/\s+//g;
-        $charCount += length unless (/\-\}/ or /^$/);
+        next if (/\-\}/ or /^$/);
+        next if (/::/);
+        next if (/=\s*$/);
+        $charCount += length $_;
     }
     say $charCount;
 }

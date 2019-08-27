@@ -21,7 +21,5 @@ Then it uses a filter lambda to discard those that do not pass
 the local-maxima test.
 -}
 localMaxima :: [Integer] -> [Integer]
-localMaxima xs = map (!! 1) $ filter (\[a, b, c] -> b > a && b > c) triplets
-  where
-    triplets = filter (\n -> length n == 3) $ transpose [xs, drop 1 xs, drop 2 xs]
+localMaxima xs = map (\(a,b,c) -> b) $ filter (\(a,b,c) -> b>a && b>c) (zip3 xs (drop 1 xs) (drop 2 xs))
 
