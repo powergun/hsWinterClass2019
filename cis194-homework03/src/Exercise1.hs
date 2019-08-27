@@ -1,5 +1,7 @@
 module Exercise1 (skips) where
 
+import           Data.List.Split
+
 {-
 This problem has two parts:
 
@@ -14,8 +16,6 @@ length parameter [1..(length xs)] over the selection function
 created in Part 1
 -}
 skips :: [a] -> [[a]]
-skips xs = map (\n -> every n xs) [1..(length xs)]
-  where
-    every n xs = case drop (n-1) xs of
-      (y:ys) -> y : every n ys
-      []     -> []
+skips xs =
+  let f n = last <$> filter ((== n) . length) (chunksOf n xs)
+  in map f [1..length xs]

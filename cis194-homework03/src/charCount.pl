@@ -2,8 +2,10 @@
 
 use 5.012;
 use warnings;
+use File::Basename;
 
-foreach(sort(my @filenames = qx/ls *.hs/)) {
+my $dirp = dirname(__FILE__);
+foreach(sort(my @filenames = qx|ls ${dirp}/*.hs|)) {
     my $charCount = 0;
     chomp; say $_; open(my $fh, $_) or die; while(<$fh>) {
         next unless /\-\}/../^\s+$/; chomp; s/\s+//g;
