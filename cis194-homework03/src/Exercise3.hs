@@ -19,6 +19,7 @@ lastly, each bar is stored in a string which is in turn stored in
 
   !! import           Data.Tuple.Utils (snd3)
   !! Data.List.HT (sieve)
+  !! ifilter, imap
 -}
 histogram :: [Integer] -> String
 histogram xs = unlines $ transpose $ map (\n -> space n ++ bar n ++ base n) cols
