@@ -18,10 +18,10 @@ lastly, each bar is stored in a string which is in turn stored in
   list ("rotating" the bar chart)
 -}
 histogram :: [Integer] -> String
-histogram xs = unlines $ transpose $ map (\n -> space n ++ bar n ++ base n) columns
+histogram xs = unlines $ transpose $ map (\n -> space n ++ bar n ++ base n) cols
   where
-    columns = [0..9]
-    height = maximum $ map (\n -> length [x | x <- xs, x == n]) columns
+    cols = [0..9]
+    height = maximum $ map (\n -> length [x | x <- xs, x == n]) cols
     bar n = replicate (length $ filter (==n) xs) '*'
     space n = replicate (height - length (bar n)) ' '
     base n = "=" ++ show n
