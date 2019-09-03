@@ -15,8 +15,8 @@ endNode v = Node 0 Leaf v Leaf
 foldTree :: [a] -> Tree a
 foldTree []     = Leaf
 foldTree (x:xs) =
-  let (half0, half1) = splitAt (length xs `div` 2) xs
-      t = Node 0 (foldTree half0) x (foldTree half1)
+  let (firstHalf, secondHalf) = splitAt (length xs `div` 2) xs
+      t = Node 0 (foldTree firstHalf) x (foldTree secondHalf)
   in calculateHeight t
 
 height :: Tree a -> Integer

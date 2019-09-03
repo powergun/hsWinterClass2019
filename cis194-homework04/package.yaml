@@ -23,7 +23,7 @@ library:
 
 tests:
   cis194-homework04-test:
-    main:                Spec.hs
+    main:                TestMain.hs
     source-dirs:         test
     ghc-options:
     - -threaded
@@ -32,3 +32,4 @@ tests:
     dependencies:
     - cis194-homework04
     - QuickCheck
+    - hspec

@@ -1,3 +1,5 @@
+module Checks (checks) where
+
 import           Exercise1
 import           Exercise2
 
@@ -19,8 +21,9 @@ exercise2TreeHeight ns =
       actualHeight = height . foldTree $ ns
   in logHeight == actualHeight
 
-main :: IO ()
-main = do
+checks :: IO ()
+checks
+ = do
   -- exercise 1
   quickCheck(exercise1Fun1 :: [Integer] -> Bool)
   quickCheck(forAll generatePositives (exercise1Fun2 :: Integer -> Bool))
