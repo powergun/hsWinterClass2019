@@ -21,12 +21,12 @@ generateInRange from_ to_ = (arbitrary :: Gen Integer) `suchThat` ((&&) <$> (<= 
 exercise1Fun2 :: Integer -> Bool
 exercise1Fun2 x = fun2Original x == fun2 x
 
-exercise2TreeHeight :: [Integer] -> Bool
-exercise2TreeHeight [] = True
+exercise2TreeHeight :: [Integer] -> String
+exercise2TreeHeight [] = ""
 exercise2TreeHeight ns =
   let logHeight    = ceiling . log . fromIntegral . toInteger . length $ ns
       actualHeight = height . foldTree $ ns
-  in logHeight == actualHeight
+  in "log-height: " ++ show logHeight ++ "; actual height: " ++ show actualHeight
 
 exercise3foldAsMap :: [Integer] -> Bool
 exercise3foldAsMap ns =
@@ -54,7 +54,7 @@ checks
   quickCheck(forAll generatePositives (exercise1Fun2 :: Integer -> Bool))
 
   -- exercise 2
-  print $ exercise2TreeHeight [1..15]
+  print $ exercise2TreeHeight [1..115]
 
   -- exercise 3
   quickCheck(exercise3foldAsMap :: [Integer] -> Bool)

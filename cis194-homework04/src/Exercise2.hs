@@ -9,9 +9,6 @@ data Tree a = Leaf
             | Node Integer (Tree a) a (Tree a)
             deriving (Show, Eq)
 
-endNode :: a -> Tree a
-endNode v = Node 0 Leaf v Leaf
-
 -- use a partition algorithm to create the tree then calculate
 -- the height for each node (still N.logN)
 foldTree :: [a] -> Tree a
@@ -26,6 +23,5 @@ height Leaf           = 0
 height (Node h _ _ _) = h
 
 calculateHeight :: Tree a -> Tree a
-calculateHeight Leaf = Leaf
-calculateHeight n@(Node _ Leaf _ Leaf) = n
+calculateHeight Leaf           = Leaf
 calculateHeight (Node h l v r) = Node (1 + max (height l) (height r)) l v r
