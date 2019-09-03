@@ -30,6 +30,11 @@ exercise3foldAsMap ns =
       actual   = map' f ns
   in expected == actual
 
+exercise3foldl :: [Integer] -> Bool
+exercise3foldl [] = True
+exercise3foldl ns =
+  myFoldl (+) 0 ns == foldl (+) 0 ns
+
 checks :: IO ()
 checks
  = do
@@ -42,5 +47,5 @@ checks
 
   -- exercise 3
   quickCheck(exercise3foldAsMap :: [Integer] -> Bool)
-
+  quickCheck(exercise3foldl :: [Integer] -> Bool)
 
