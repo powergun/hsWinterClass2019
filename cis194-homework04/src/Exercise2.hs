@@ -12,6 +12,8 @@ data Tree a = Leaf
 endNode :: a -> Tree a
 endNode v = Node 0 Leaf v Leaf
 
+-- use a partition algorithm to create the tree then calculate
+-- the height for each node (still N.logN)
 foldTree :: [a] -> Tree a
 foldTree []     = Leaf
 foldTree (x:xs) =
