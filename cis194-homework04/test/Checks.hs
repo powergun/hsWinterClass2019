@@ -3,6 +3,9 @@ module Checks (checks) where
 import           Exercise1
 import           Exercise2
 import           Exercise3
+import           Exercise4
+
+import           Data.Numbers.Primes
 
 import           Test.QuickCheck
 
@@ -11,6 +14,9 @@ exercise1Fun1 xs = fun1Original xs == fun1 xs
 
 generatePositives :: Gen Integer
 generatePositives = (arbitrary :: Gen Integer) `suchThat` (> 0)
+
+generateInRange :: Integer -> Integer -> Gen Integer
+generateInRange from_ to_ = (arbitrary :: Gen Integer) `suchThat` ((&&) <$> (<= to_) <*> (>= from_))
 
 exercise1Fun2 :: Integer -> Bool
 exercise1Fun2 x = fun2Original x == fun2 x
@@ -35,6 +41,11 @@ exercise3foldl [] = True
 exercise3foldl ns =
   myFoldl (+) 0 ns == foldl (+) 0 ns
 
+exercise4 :: Integer -> Bool
+exercise4 n =
+  let primes = sieveSundaram n
+  in all id (map isPrime primes)
+
 checks :: IO ()
 checks
  = do
@@ -49,3 +60,5 @@ checks
   quickCheck(exercise3foldAsMap :: [Integer] -> Bool)
   quickCheck(exercise3foldl :: [Integer] -> Bool)
 
+  -- exercise 4
+  quickCheck(forAll (generateInRange 3 100) (exercise4 :: Integer -> Bool))
