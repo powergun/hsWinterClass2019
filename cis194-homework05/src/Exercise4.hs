@@ -19,15 +19,15 @@ instance Expr Integer where
   mul = (*)
 
 instance Expr Bool where
-  lit = bool <$> const False <*> const True <*> (> 0)
+  lit = (> 0)
   add = (||)
   mul = (&&)
 
 newtype MinMax = MinMax Integer deriving (Eq, Show)
 instance Expr MinMax where
   lit = MinMax
-  add (MinMax l) (MinMax r) = MinMax (max l r)
-  mul (MinMax l) (MinMax r) = MinMax (min l r)
+  add (MinMax l) (MinMax r) = MinMax $ max l r
+  mul (MinMax l) (MinMax r) = MinMax $ min l r
 
 newtype Mod7 = Mod7 Integer deriving (Eq, Show)
 instance Expr Mod7 where

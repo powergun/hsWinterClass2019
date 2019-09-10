@@ -19,7 +19,7 @@ specs = hspec $ do
       testSat `shouldBe` Just (Mod7 0)
 
   describe "Exericse 5" $ do
-    it "compile and execute program" $ do
+    it "compiles and executes program" $ do
       let result = case compile "2 + 4 * 10" of
                     Just prog -> stackVM prog
           value  = case result of
