@@ -6,6 +6,7 @@ import           Test.QuickCheck
 
 import           Exercise1
 import           Exercise2
+import           Exercise3
 import           ExprT
 
 -- given a, b, c
@@ -29,6 +30,12 @@ exercise2EvalStr a b c =
       result3 = evalStr (expr3 a b) == Nothing
   in result1 && result2 && result3
 
+-- verify that mul (add (lit 2) (lit 3)) (lit 4) === (2 + 3) * 4
+exercise3 :: Integer -> Integer -> Integer -> Bool
+exercise3 a b c =
+  let expr = mul (add (lit a) (lit b)) (lit c)
+  in eval (retify expr) == (a + b) * c
+
 checks :: IO ()
 checks = do
   -- exercise 1, eval
@@ -36,4 +43,8 @@ checks = do
 
   -- exercise 2, evalStr
   quickCheck(exercise2EvalStr :: Integer -> Integer -> Integer -> Bool)
+
+  -- exercise 3
+  quickCheck(exercise3 :: Integer -> Integer -> Integer -> Bool)
+
 
