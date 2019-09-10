@@ -3,6 +3,8 @@ module Specs (specs) where
 import           Test.Hspec
 
 import           Exercise4
+import           Exercise5
+import           StackVM
 
 specs :: IO ()
 specs = hspec $ do
@@ -15,3 +17,9 @@ specs = hspec $ do
       testMM `shouldBe` Just (MinMax 5)
     it "performs Mod7 arithmetic" $ do
       testSat `shouldBe` Just (Mod7 0)
+
+  describe "Exericse 5" $ do
+    it "bla" $ do
+      let prog = compile ""
+      stackVM prog
+
