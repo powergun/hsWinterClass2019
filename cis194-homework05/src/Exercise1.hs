@@ -1,12 +1,6 @@
-module Exercise1
-    ( ExprT(..)
-    , eval
-    ) where
+module Exercise1 (eval) where
 
-data ExprT  = Lit Integer
-            | Add ExprT ExprT
-            | Mul ExprT ExprT
-            deriving (Show, Eq)
+import           ExprT
 
 eval :: ExprT -> Integer
 eval (Lit n)       = n
