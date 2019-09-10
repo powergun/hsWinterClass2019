@@ -1,7 +1,9 @@
 
 import           Checks
+import           Specs
 
 main :: IO ()
-main =
+main = do
   checks
+  specs
 

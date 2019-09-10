@@ -3,12 +3,8 @@ module Exercise3
   , retify
   ) where
 
+import           Expr
 import           ExprT
-
-class Expr a where
-  add :: a -> a -> a
-  mul :: a -> a -> a
-  lit :: Integer -> a
 
 instance Expr ExprT where
   lit = Lit
