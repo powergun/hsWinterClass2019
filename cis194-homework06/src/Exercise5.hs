@@ -3,6 +3,7 @@ module Exercise5
   , ruler
   ) where
 
+import           Data.Bool
 import           Exercise4
 import           Stream
 
@@ -18,7 +19,9 @@ n 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
   0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4
 -}
 ruler :: Stream Integer
-ruler = streamMap f . streamFromSeed (+ 1) $ 1
+ruler = streamMap f $ streamFromSeed (+ 1) 1
     where
       f :: Integer -> Integer
-      f n = 1
+      f n = g 0 n
+      g :: Integer -> Integer -> Integer
+      g r n = bool r (g (r + 1) (n `div` 2)) (n `mod` 2 == 0)

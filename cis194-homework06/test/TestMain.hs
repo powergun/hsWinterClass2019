@@ -48,6 +48,6 @@ main = hspec $ do
       (take 10 . streamToList $ nats) `shouldBe` [0..9]
 
     it "implement ruler: the n-th element in the stream is the largest power of 2 which evenly divides n" $ do
-      print 1
+      (take 16 . streamToList $ ruler) `shouldBe` [0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4]
 
 
