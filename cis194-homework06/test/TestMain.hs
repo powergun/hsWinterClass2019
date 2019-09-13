@@ -5,13 +5,14 @@ import           Exercise1
 import           Exercise2
 import           Exercise3
 import           Exercise4
+import           Exercise5
 import           Stream
 
 
 main :: IO ()
 main = hspec $ do
   describe "Exercise 1" $ do
-    it "compute the first 30 fibonacci numbers" $ do
+    it "compute the first 31 fibonacci numbers" $ do
       -- first 31 fib numbers downloaded from
       -- http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
       let expected = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89,
@@ -34,12 +35,19 @@ main = hspec $ do
 
   describe "Exercise 4" $ do
     it "implement streamRepeat()" $ do
-      ((take 3) . streamToList . streamRepeat $ 1) `shouldBe` [1, 1, 1]
+      (take 3 . streamToList . streamRepeat $ 1) `shouldBe` [1, 1, 1]
 
     it "implement streamMap()" $ do
-      ((take 3) . streamToList . (streamMap (> 0)) . streamRepeat $ 1) `shouldBe` [True, True, True]
+      (take 3 . streamToList . (streamMap (> 0)) . streamRepeat $ 1) `shouldBe` [True, True, True]
 
     it "implement streamFromSeed()" $ do
-      ((take 3) . streamToList . streamFromSeed (+ 1) $ 1) `shouldBe` [1, 2, 3]
+      (take 3 . streamToList . streamFromSeed (+ 1) $ 1) `shouldBe` [1, 2, 3]
+
+  describe "Exercise 5" $ do
+    it "implement nats: all natural numbers starting from 0" $ do
+      (take 10 . streamToList $ nats) `shouldBe` [0..9]
+
+    it "implement ruler: the n-th element in the stream is the largest power of 2 which evenly divides n" $ do
+      print 1
 
 
