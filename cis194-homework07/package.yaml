@@ -6,7 +6,9 @@ author:              "Author name here"
 maintainer:          "example@example.com"
 copyright:           "2019 Author name here"
 
-extra-source-files: []
+extra-source-files:
+- README.md
+- ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -23,6 +25,17 @@ dependencies:
 library:
   source-dirs: src
 
+executables:
+  cis194-homework07-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - cis194-homework07
+
 tests:
   cis194-homework07-test:
     main:                Spec.hs
@@ -33,5 +46,3 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - cis194-homework07
-    - QuickCheck
-    - hspec
