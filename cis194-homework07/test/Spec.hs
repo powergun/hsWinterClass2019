@@ -16,10 +16,15 @@ main = hspec $
       let a = Single "A" ""
       let b = Single "B" ""
       let c = Append "C" a b
-      tag c `shouldBe` "AB"
+      tag c `shouldBe` "C"
     it "provides the join operator (+++)" $ do
       let a = Single "A" ""
       let b = Single "B" ""
       let c = a +++ b
       tag c `shouldBe` "AB"
+    it "creates deeply nested join list" $ do
+      let a = Single "A" ""
+      let b = Single "B" ""
+      let c = (a +++ b) +++ (a +++ b)
+      tag c `shouldBe` "ABAB"
 

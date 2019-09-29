@@ -10,10 +10,9 @@ data JoinList m a = Empty
                   deriving (Eq, Show)
 
 (+++) :: Monoid m => JoinList m a -> JoinList m a -> JoinList m a
-(+++) a b = Append mempty a b
+(+++) a b = Append (tag a `mappend` tag b) a b
 
 tag :: Monoid m => JoinList m a -> m
-tag (Single m a)       = m
-tag (Append _ lhs rhs) = tag lhs `mappend` tag rhs
-tag _                  = mempty
-
+tag (Single m _)   = m
+tag (Append m _ _) = m
+tag _              = mempty
