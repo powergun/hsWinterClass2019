@@ -17,4 +17,9 @@ main = hspec $
       let b = Single "B" ""
       let c = Append "C" a b
       tag c `shouldBe` "AB"
+    it "provides the join operator (+++)" $ do
+      let a = Single "A" ""
+      let b = Single "B" ""
+      let c = a +++ b
+      tag c `shouldBe` "AB"
 

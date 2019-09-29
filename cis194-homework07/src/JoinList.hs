@@ -1,6 +1,6 @@
 module JoinList
   ( JoinList(..)
-  -- , (+++)
+  , (+++)
   , tag
   ) where
 
@@ -10,7 +10,7 @@ data JoinList m a = Empty
                   deriving (Eq, Show)
 
 (+++) :: Monoid m => JoinList m a -> JoinList m a -> JoinList m a
-(+++) a b = a
+(+++) a b = Append mempty a b
 
 tag :: Monoid m => JoinList m a -> m
 tag (Single m a)       = m
