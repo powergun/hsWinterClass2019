@@ -1,0 +1,7 @@
+# warp is War and Piece, in plain utf-8 txt format, downloaded from
+# http://www.gutenberg.org/ebooks/2600
+# it has a original size of 3.6mb;
+# I've duplicated its content four times, creating a 13mb txt file that is 
+# heavy enough to show the performance problem
+# 
+warp*.txt

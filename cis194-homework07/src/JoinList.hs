@@ -1,6 +1,6 @@
 module JoinList
   ( JoinList(..)
-  , (+++)
+  -- , (+++)
   ) where
 
 data JoinList m a = Empty
@@ -8,7 +8,7 @@ data JoinList m a = Empty
                   | Append m (JoinList m a) (JoinList m a)
                   deriving (Eq, Show)
 
-(+++) :: Monoid m => JoinList m a -> JoinList m a -> JoinList m a
+-- (+++) :: Monoid m => JoinList m a -> JoinList m a -> JoinList m a
 
 
 
