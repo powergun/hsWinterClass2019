@@ -1,6 +1,5 @@
-module Party
+module Exercise1
     ( glCons
-    ,
     ) where
 
 import           Employee
