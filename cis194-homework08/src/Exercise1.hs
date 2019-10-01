@@ -26,5 +26,5 @@ instance Monoid GuestList where
     mempty = GL [] 0
 
 moreFun :: GuestList -> GuestList -> GuestList
-moreFun lhs rhs = bool lhs rhs (funs lhs <= funs rhs)
+moreFun = max
 
