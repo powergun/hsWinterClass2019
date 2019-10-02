@@ -9,4 +9,5 @@ import           Exercise2
 import           Exercise3
 
 maxFun :: Tree Employee -> GuestList
-maxFun = uncurry moreFun . treeFold nextLevel
+maxFun =
+  uncurry moreFun . treeFold nextLevel

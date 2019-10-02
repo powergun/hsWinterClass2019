@@ -1,7 +1,6 @@
 
 import           Exercise1Test
 import           Exercise2Test
-
 import           Exercise5Test
 
 main :: IO ()
